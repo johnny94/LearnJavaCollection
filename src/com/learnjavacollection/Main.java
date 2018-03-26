@@ -1,8 +1,10 @@
 package com.learnjavacollection;
 
+import com.learnjavacollection.collections.CompartorMethod;
+
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+        CompartorMethod.example1();
     }
 }
