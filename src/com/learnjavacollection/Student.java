@@ -42,13 +42,16 @@ public class Student {
         this.gpa = gpa;
     }
 
+    /*
+        Comparator
+     */
     private static final Comparator<Student> gradeComparator = new GradeComparator();
 
     public static Comparator<Student> GradeComparator() {
         return gradeComparator;
     }
 
-    private static class GradeComparator implements java.util.Comparator<Student> {
+    private static class GradeComparator implements Comparator<Student> {
 
         @Override
         public int compare(Student o1, Student o2) {
@@ -56,10 +59,10 @@ public class Student {
         }
     }
 
-    private static final Comparator<Student> nameComparator = new NameComparator();
 
+    // Null-safe comparator example.
     public static Comparator<Student> nameComparator() {
-        return nameComparator;
+        return Comparator.comparing(x -> x.name, Comparator.nullsFirst(Comparator.naturalOrder()));
     }
 
     private static class NameComparator implements Comparator<Student> {
@@ -73,9 +76,9 @@ public class Student {
     @Override
     public String toString() {
         return "Student{" +
-            "name='" + name + '\'' +
-            ", address='" + address + '\'' +
-            ", gpa=" + gpa +
-            '}';
+                "name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", gpa=" + gpa +
+                '}';
     }
 }

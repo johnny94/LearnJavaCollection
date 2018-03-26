@@ -1,6 +1,7 @@
 package com.learnjavacollection.collections;
 
 import com.learnjavacollection.Name;
+import com.learnjavacollection.Student;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,13 +14,13 @@ import java.util.List;
 public class CompartorMethod {
     public static void example1() {
         List<Name> ln = new ArrayList<>(Arrays.asList(
-            new Name("Fred", "Jones"),
-            new Name("Jim", "Anderson"),
-            new Name("Shiela", "Jones"),
-            new Name("Fred", "Smith"),
-            new Name("Fred", "Anderson"),
-            new Name("Jim", "Jones"),
-            new Name("Sheila", "Anderson")
+                new Name("Fred", "Jones"),
+                new Name("Jim", "Anderson"),
+                new Name("Sheila", "Jones"),
+                new Name("Fred", "Smith"),
+                new Name("Fred", "Anderson"),
+                new Name("Jim", "Jones"),
+                new Name("Sheila", "Anderson")
         ));
 
         Comparator<Name> byLast = (a, b) -> a.getLast().compareTo(b.getLast());
@@ -29,5 +30,25 @@ public class CompartorMethod {
         System.out.println("------------------------");
         ln.sort(byLast.thenComparing(x -> x.getFirst(), Comparator.reverseOrder()));
         ln.forEach(n -> System.out.println(n));
+    }
+
+    public static void example2() {
+        List<String> ls = new ArrayList<>(Arrays.asList(
+                "Sheila", null, "Fred", "Jim"
+        ));
+        ls.sort(Comparator.nullsFirst(Comparator.naturalOrder()));
+        System.out.println(ls);
+    }
+
+    public static void example3() {
+        List<Student> ls = new ArrayList<>(Arrays.asList(
+                new Student("Fred", "here", 3.4f),
+                new Student(null, "here", 3.5f),
+                new Student("Jim", "here", 3.2f),
+                new Student("Sheila", "there", 3.8f)
+        ));
+
+        ls.sort(Student.nameComparator());
+        ls.forEach(s -> System.out.println(s));
     }
 }
